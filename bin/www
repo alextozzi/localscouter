@@ -24,7 +24,7 @@ var server = http.createServer(app);
 var restful = require('node-restful');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/upload');
+mongoose.connect('mongodb://localhost/localscouter');
 
 var Plaats = app.plaats = restful.model('Plaats', mongoose.Schema({
   titel: {
@@ -40,16 +40,16 @@ var Plaats = app.plaats = restful.model('Plaats', mongoose.Schema({
   required: true
   }
 }, {collection: 'plaats'})).methods(['get', 'post', 'put', 'delete']);
-Plaats.register(app, '/upload');
+Plaats.register(app, '/plaats');
 
 var io = require('socket.io')(server);
 var plaatsen = [];
 
-socket.on('updatePictures', function(data){
-    User.findOneAndUpdate([data.titel, data.beschrijving, data.picture]}, function(err, b){
+/*socket.on('updatePictures', function(data){
+    Plaats.findOneAndUpdate([data.titel, data.beschrijving, data.picture]), function(err, b){
           console.log('b', b);
-    });
-  });
+    }}
+  );*/
 
 io.on('connection', function(socket){
   console.log('user connected');

@@ -12,7 +12,7 @@ $(document).ready(function(){
         var picture = $("#linkpicture").val();
         var pictureupload = "/uploads/" + picture.replace('C:\\fakepath\\', '');
 
-        socket.emit('updatePictures', {titel : titel, beschrijving: beschrijving, picture: picture});
+        socket.emit('addPlaats', {titel : titel, beschrijving: beschrijving, picture: picture});
 
         $(this).ajaxSubmit({
             error: function(xhr) {
