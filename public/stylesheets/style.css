@@ -1,0 +1,111 @@
+body{background-color:#e9e9eb;}
+
+.navbar-header {
+    float: none;
+}
+.navbar-toggle {
+    display: block;
+}
+.navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.navbar-collapse.collapse {
+    display: none!important;
+
+}
+.navbar-nav {
+    float: none!important;
+    margin: 7.5px -15px;
+
+}
+.navbar-nav>li {
+    float: none;
+    text-align:center;
+
+}
+
+.navbar-collapse.collapse.in {display: block !important; }
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.polaroid {
+
+    position: relative;
+    width: 400px;
+
+}
+
+.polaroid img {
+    border: 10px solid #fff;
+    border-bottom: 45px solid #fff;
+    -webkit-box-shadow: 3px 3px 3px #777;
+    -moz-box-shadow: 3px 3px 3px #777;
+    box-shadow: 3px 3px 3px #777;
+    max-width:300px;
+}
+
+.polaroid p {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 0px;
+    font: 400 18px/1 'Kaushan Script', cursive;
+    color: #888;
+}
+
+button{margin-top:20px;margin-bottom:20px;background-color:white;}
+.button-left{}
+.button-right{float:right;margin-right:-20px;}
+.container{margin-top:150px;width:310px;}
+
+img{width:100%;height:100%;}
+#foto2{margin-top:-250px;}
+#foto3{margin-top:-220px;margin-left:-70px;}
+
+/* Animation Sector */
+
+.animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.52;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.animated2 {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 0.7s; /* Chrome, Safari, Opera */
+    animation-delay: 0.7s;
+}
+.animated3 {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.52;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 1.4s; /* Chrome, Safari, Opera */
+    animation-delay: 1.4s;
+}
+.animated4 {
+-webkit-animation-duration: 0.2s;
+    animation-duration: 0.52;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 2s; /* Chrome, Safari, Opera */
+    animation-delay:2s;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
