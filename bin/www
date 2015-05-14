@@ -23,6 +23,7 @@ var server = http.createServer(app);
 
 var restful = require('node-restful');
 var mongoose = require('mongoose');
+var socket =
 
 mongoose.connect('mongodb://localhost/localscouter');
 
@@ -38,35 +39,44 @@ var Plaats = app.plaats = restful.model('Plaats', mongoose.Schema({
   picture: {
   type: String,
   required: true
-  }
+  },
+     vote: {
+     type: Number,
+     required: true,
+     default : 0
+     }
 }, {collection: 'plaats'})).methods(['get', 'post', 'put', 'delete']);
-Plaats.register(app, '/plaats');
+Plaats.register(app, '/main');
 
 var io = require('socket.io')(server);
 var plaatsen = [];
-
-/*socket.on('updatePictures', function(data){
-    Plaats.findOneAndUpdate([data.titel, data.beschrijving, data.picture]), function(err, b){
-          console.log('b', b);
-    }}
-  );*/
 
 io.on('connection', function(socket){
   console.log('user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
-  });
-  socket.on('print', function(){
-    Plaats.find().exec(function(err, plaatsen){
-      socket.emit('printPlaatsen', plaatsen);
-    });
-  });
-  socket.on('addPlaats', function(a){
+
+socket.on('addPlaats', function(a){
     Plaats.create(a, function(err, b){
       io.sockets.emit('update', b);
     });
   });
+
+
+  var random = 0;
+socket.on('randomize', function(){
+        Plaats.find({}, function(err, c){
+          socket.emit('randomPlaats', c);
+        });
+      });
+
+  });
+
 });
+
+
+
+
 
 /**
  * Listen on provided port, on all network interfaces.
