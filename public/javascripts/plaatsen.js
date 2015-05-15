@@ -2,7 +2,39 @@ $(document).ready(function(){
     var socket = io.connect('http://localhost:3000');
     var seenSlide = 0;
     var seenPlaatsen = [];
+    var Plaats = '';
 
+    socket.on('randomPlaats', function(randPlaats){
+        seenSlide++;
+        var besteming = randPlaats.length;
+
+        if(seenSlide <= besteming){
+            var random = Math.floor(Math.random()*besteming);
+
+            while($.inArray(random, seenPlaatsen) > -1)
+            {
+                random = Math.floor(Math.random()*besteming);
+            }
+            var plaatsbesteming = randPlaats[random];
+
+            seenPlaatsen.push(random);
+
+            $('#slidefoto').attr({src:plaatsbesteming.picture});
+            $('#slidebeschrijving').text(plaatsbesteming.beschrijving);
+            $('#slidetitel').text(plaatsbesteming.titel);
+        } else {
+            window.location.href = '/uploadfoto';
+        }
+    });
+
+    $('#button-left').on('click', function(){
+        socket.emit('randomize', {});
+    });
+    $('#button-right').on('click', function(){
+        socket.emit('randomize', {})
+
+
+    });
 
     $('#uploadForm').submit(function() {
         var titel = $("#titel").val();
@@ -26,36 +58,5 @@ $(document).ready(function(){
     });
 
 
-    socket.on('randomPlaats', function(randPlaats){
-        seenSlide++;
-        var besteming = randPlaats.length;
 
-        if(seenSlide <= besteming){
-            var random = Math.floor(Math.random()*besteming);
-
-            while($.inArray(random, seenPlaatsen) > -1)
-            {
-                random = Math.floor(Math.random()*besteming);
-            }
-            var plaats = randPlaats[random];
-
-            seenPlaatsen.push(random);
-
-            $('#slidefoto').attr({src: plaats.picture});
-            $('#slidebeschrijving').text(plaats.beschrijving);
-            $('#slidetitel').text(plaats.titel);
-
-        } else {
-            window.location.href = '/upload';
-        }
-    });
-
-    $('.button-left').on('submit', function(){
-        socket.emit('randomize', {});
-    });
-    $('.button-right').on('submit', function(){
-        socket.emit('randomize', {})
-        socket.emit('vote');
-
-    });
 });

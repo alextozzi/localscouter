@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/javascripts/plaatssen.js"></script>
+    <script src="/javascripts/plaatsen.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body class="animated fadeIn">
@@ -37,19 +37,17 @@
 </nav>
 <div class="container">
 <div class="polaroid">
-    <img  id="slidefoto" src="">
+    <img  id="slidefoto" src="" alt="">
     <p id="slidebeschrijving"></p>
     <p id="slidetitel"></p>
 
 
 </div>
-    <button type="submit" class="button-left">Known</button>
-    <button type="submit" class="button-right">Unknown</button>
+    <button type="submit" id="button-left">Known</button>
+    <button type="submit" id="button-right">Unknown</button>
 
 </div>
-
-
-<script>
+<script >
     $(document).ready(function(){
         var socket = io.connect('http://localhost:3000');
         socket.emit('randomize', {});
