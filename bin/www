@@ -39,11 +39,20 @@ var Plaats = app.plaats = restful.model('Plaats', mongoose.Schema({
   type: String,
   required: true
   },
-        vote: {
+   vote: {
         type: Number,
         required: true,
         default : 0
+        },
+        latitude: {
+        type: Number,
+        required: true
+        },
+        longitude: {
+        type: Number,
+        required: true
         }
+
 }, {collection: 'plaats'})).methods(['get', 'post', 'put', 'delete']);
 Plaats.register(app, '/plaats');
 
@@ -70,6 +79,16 @@ socket.on('randomize', function(){
           socket.emit('randomPlaats', c);
         });
       });
+
+socket.on('plus', function(a){
+		Plaats.find({vote: a}).exec(function(err, vote){
+			socket.emit('votePlus', vote);
+		});
+		});
+
+
+
+
 
 });
 

@@ -3,6 +3,8 @@ $(document).ready(function(){
     var seenSlide = 0;
     var seenPlaatsen = [];
     var Plaats = '';
+    var hoeveel;
+    var datavote;
 
     socket.on('randomPlaats', function(randPlaats){
         seenSlide++;
@@ -22,6 +24,11 @@ $(document).ready(function(){
             $('#slidefoto').attr({src:plaatsbesteming.picture});
             $('#slidebeschrijving').text(plaatsbesteming.beschrijving);
             $('#slidetitel').text(plaatsbesteming.titel);
+            $('#slidealtitude').text(plaatsbesteming.latitude);
+            $('#slidelongitude').text(plaatsbesteming.longitude);
+
+
+
         } else {
             window.location.href = '/uploadfoto';
         }
@@ -31,18 +38,31 @@ $(document).ready(function(){
         socket.emit('randomize', {});
     });
     $('#button-right').on('click', function(){
+        datavote = $(this).data('vote');
+        socket.emit('plus', datavote);
         socket.emit('randomize', {})
 
-
     });
+
+
+    socket.on('votePlus', function(vote){
+        datavote = vote[0].data;
+        hoeveel = vote[0].vote;
+        hoeveel++;
+        socket.emit('hoeveel', { vote: hoeveel});
+    });
+
+
 
     $('#uploadForm').submit(function() {
         var titel = $("#titel").val();
         var beschrijving = $("#beschrijving").val();
         var pictureupload = $("#linkpicture").val();
         var picture= "/uploads/" + pictureupload.replace('C:\\fakepath\\', '');
+        var latitude = $('#latitude').val();
+        var longitude = $('#longitude').val();
 
-        socket.emit('addPlaats', {titel : titel, beschrijving: beschrijving, picture: picture});
+        socket.emit('addPlaats', {titel : titel, beschrijving: beschrijving, picture: picture,latitude: latitude, longitude:longitude });
 
         $(this).ajaxSubmit({
             error: function(xhr) {

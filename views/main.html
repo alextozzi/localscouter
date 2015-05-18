@@ -13,19 +13,58 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="/javascripts/plaatsen.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latlon = 51.0208132 + "," + 4.4737954;
+
+            var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+                    +latlon+"&zoom=14&size=400x300&sensor=false";
+            document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
+        }
+
+    </script>
+
+
 </head>
-<body class="animated fadeIn">
+<body class="animated fadeIn" onload="getLocation()">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/main">Brand</a>
+        <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo"/></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
     </div>
-    <li style="text-align:center; color:white; font-size:30px;list-style-type:none;">Main</li>
+    <li style="text-align:center; color:white; font-size:30px;list-style-type:none;margin-top:-50px">Main</li>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <<li><a href="/top10region">Top 10 Region</a></li>
@@ -36,18 +75,35 @@
     </div>
 </nav>
 <div class="container">
-<div class="polaroid">
-    <img  id="slidefoto" src="" alt="">
-    <p id="slidebeschrijving"></p>
-    <p id="slidetitel"></p>
 
 
+
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+            <div class="flipper">
+                <div class="front">
+    <div class="polaroid">
+            <img  id="slidefoto" class="image" src="" alt="">
+            <p id="slidetitel"></p>
+            </div>
 </div>
+                <div class="back">
+                    <div class="polaroid">
+
+                    <div id="mapholder"></div>
+            <p id="slidebeschrijving"></p>
+                        </div>
+                </div>
+        </div>
+    </div>
+
+
     <button type="submit" id="button-left">Known</button>
     <button type="submit" id="button-right">Unknown</button>
 
 </div>
-<script >
+
+<script>
     $(document).ready(function(){
         var socket = io.connect('http://localhost:3000');
         socket.emit('randomize', {});

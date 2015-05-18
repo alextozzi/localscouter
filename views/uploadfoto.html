@@ -12,18 +12,18 @@
     <script src="/javascripts/plaatsen.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="animated fadeIn">
+<body class="animated fadeIn" onload="getLocation()">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/main">Brand</a>
+        <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo"/></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
     </div>
-    <li style="text-align:center; color:white; font-size:30px;list-style-type:none;">Upload a Foto</li>
+    <li style="text-align:center; color:white; font-size:30px;list-style-type:none;margin-top:-50px;">Upload a Foto</li>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <<li><a href="/top10region">Top 10 Region</a></li>
@@ -43,10 +43,31 @@
         <label>Geef hier een korte beschrijving in</label>
         <input id ="beschrijving" type="text" name="beschrijving" />
         <input id="linkpicture" type="file" name="userPhoto" />
+        <input type="hidden" id="latitude">
+        <input type="hidden" id="longitude">
         <input type="submit" value="Upload Image" name="submit">
     </form>
 </div>
+<script>
 
+    var x = document.getElementById("latitude");
+    var y = document.getElementById("longitude");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.value =  position.coords.latitude;
+        y.value = position.coords.longitude;
+    }
+
+
+</script>
 
 
 
