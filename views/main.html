@@ -55,24 +55,28 @@
 </head>
 <body class="animated fadeIn" onload="getLocation()">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo"/></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <li style="text-align:center; color:white; font-size:30px;list-style-type:none;margin-top:-50px">Main</li>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <<li><a href="/top10region">Top 10 Region</a></li>
-            <li><a href="/top10Overal">Top 10 Overal</a></li>
-            <li><a href="/uploadfoto">Upload a Foto</a></li>
-        </ul>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span style="background-color:white;" class="icon-bar"></span>
+                <span style="background-color:white;" class="icon-bar"></span>
+                <span style="background-color:white;"class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo" style="height:30px;width:130px;"/></a>
+            <h1 style="text-align:center;color:white;">Main</h1>
+        </div>
 
-    </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li style="color:white;background-color:#f15f22;"><a href="/top10region">Top 10 Region </a></li>
+                <li style="color:white;background-color:#f15f22"><a href="/top10Overal">Top 10 Overal</a></li>
+                <li style="color:white;background-color:#f15f22;"><a href="/uploadfoto">Upload </a></li>
+            </ul>
+        </div> </div>
 </nav>
 <div class="container">
 
@@ -98,8 +102,8 @@
     </div>
 
 
-    <button type="submit" id="button-left">Unknown</button>
-    <button type="submit" id="button-right">Known</button>
+    <button type="submit" id="button-left" >Known</button>
+    <button type="submit" id="button-right" >Unknown</button>
 
 </div>
 
