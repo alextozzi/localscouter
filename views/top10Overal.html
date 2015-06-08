@@ -2,15 +2,67 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Top 10 Overal page</title>
+    <title>Main page</title>
+    <link href="http://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/javascripts/plaatsen.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latlon = 51.0208132 + "," + 4.4737954;
+
+            var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+                    +latlon+"&zoom=14&size=400x300&sensor=false";
+            document.getElementsByClassName("mapholder")[0].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[1].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[2].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[3].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[4].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[5].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[6].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[7].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[8].innerHTML = "<img src='"+img_url+"'>";
+            document.getElementsByClassName("mapholder")[9].innerHTML = "<img src='"+img_url+"'>";
+
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
+        }
+
+    </script>
+
+
 </head>
-<body class="animated fadeIn">
+<body class="animated fadeIn" onload="getLocation()">
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -22,131 +74,240 @@
                 <span style="background-color:white;" class="icon-bar"></span>
                 <span style="background-color:white;"class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo" style="height:30px;width:130px;"/></a>
-            <h1 style="text-align:center;color:white;">Top 10 Overal</h1>
+
+            <h1 style="text-align:center;color:white;font: 400 24px/1 'Kaushan Script';">Top 10 World</h1>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li style="color:white;background-color:#f15f22;"><a href="/top10region">Top 10 Region </a></li>
-                <li style="color:white;background-color:#f15f22"><a href="/top10Overal">Top 10 Overal</a></li>
-                <li style="color:white;background-color:#f15f22;"><a href="/uploadfoto">Upload </a></li>
+                <li style="border:solid 0.5px white;margin-top:-5px;"><a href="/main">Home </a></li>
+                <li style="border:solid 0.5px white;"><a href="/top10region">Top 10 Local </a></li>
+                <li style="border:solid 0.5px white;"><a href="/top10Overal">Top 10 World</a></li>
+                <li style="border:solid 0.5px white;"><a href="/uploadfoto">Upload </a></li>
             </ul>
         </div> </div>
 </nav>
-
 <div class="container">
-    <div class="polaroid">
-        <img src="http://www.vlaanderenvakantieland.nl/binaries/_0010_mechelen_geschiedenis_tcm47-139773.jpg">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="https://michaelblogt.files.wordpress.com/2014/12/img_0809.jpg">
+
+
+
+
+    <div style="margin-top:-100px;" class="flip-container" ontouchstart="this.classList.toggle('hover');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://www.vlaanderenvakantieland.nl/binaries/_0010_mechelen_geschiedenis_tcm47-139773.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="polaroid">
-    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTezNKzCNsT0LMUXSLVoyy8v6ivGVW1CmwGlRLNvgbEScmqwA">
+
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="https://michaelblogt.files.wordpress.com/2014/12/img_0809.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTezNKzCNsT0LMUXSLVoyy8v6ivGVW1CmwGlRLNvgbEScmqwA">                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://www.tervuren.be/images/uploaded/634309408941927583.jpg">                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="https://michaelblogt.files.wordpress.com/2011/08/img_53841.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://www.pasar.be/activiteiten/themafotos/1/01.jpg">                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+
+                    <img src="http://toerisme.ego4.mechelen.preview.anaxis.be/files/uploads/imagecache/Origineel/images/Sint-Romboutstoren/sint-romboutstoren_skywalkcaikonproducties_toerisme_mechelen-6.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://toerisme.mechelen.be/files/uploads/imagecache/nexDoormatMenuItemImage/images/Menu/Doen/Wandelen%20en%20Fietsen/waar-naartoe_actief-bezoeken_wandelen_ind_in-de-natuur_wandelgebied-rivierenland_bert-delanoeije.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://www.vlaanderenvakantieland.nl/binaries/lier-0404-12-c-D_Rys%20_Toerisme%20Vlaanderen-47-54363.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="flip-container" onclick="this.classList.toggle('click');">
+        <div class="flipper">
+            <div class="front">
+                <div class="polaroid">
+                    <img src="http://toerisme.mechelen.be/files/uploads/imagecache/nexDoormatMenuItemImage/images/Menu/Doen/Wandelen%20en%20Fietsen/waar-naartoe_actief-bezoeken_wandelen_ind_in-de-natuur_wandelgebied-rivierenland_bert-delanoeije.jpg">
+                    <p>Mechelen</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="polaroid">
+                    <div class="mapholder"></div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+
+
+    <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+
+
+
 </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="http://www.vlaanderenvakantieland.nl/binaries/lier-0404-12-c-D_Rys%20_Toerisme%20Vlaanderen-47-54363.jpg">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="http://www.tervuren.be/images/uploaded/634309408941927583.jpg">
-    </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="https://michaelblogt.files.wordpress.com/2011/08/img_53841.jpg">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="http://www.pasar.be/activiteiten/themafotos/1/01.jpg">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="http://toerisme.ego4.mechelen.preview.anaxis.be/files/uploads/imagecache/Origineel/images/Sint-Romboutstoren/sint-romboutstoren_skywalkcaikonproducties_toerisme_mechelen-6.jpg">
-    </div>
+<script>
+    $(document).ready(function(){
+        var socket = io.connect('http://localhost:3000');
+        socket.emit('randomize', {});
+    });
+    $(window).scroll(function() {
+        if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+            $('#return-to-top').fadeIn(200);    // Fade in the arrow
+        } else {
+            $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+        }
+    });
+    $('#return-to-top').click(function() {      // When arrow is clicked
+        $('body,html').animate({
+            scrollTop : 0                       // Scroll to top of body
+        }, 500);
+    });
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="polaroid">
-        <img src="http://toerisme.mechelen.be/files/uploads/imagecache/nexDoormatMenuItemImage/images/Menu/Doen/Wandelen%20en%20Fietsen/waar-naartoe_actief-bezoeken_wandelen_ind_in-de-natuur_wandelgebied-rivierenland_bert-delanoeije.jpg">
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+</script>
 
 
 </body>

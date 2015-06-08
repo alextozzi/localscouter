@@ -49,13 +49,19 @@
             }
         }
 
+
+
+
+
     </script>
+
+
 
 
 </head>
 <body class="animated fadeIn" onload="getLocation()">
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -65,16 +71,17 @@
                 <span style="background-color:white;" class="icon-bar"></span>
                 <span style="background-color:white;"class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo" style="height:30px;width:130px;"/></a>
-            <h1 style="text-align:center;color:white;">Main</h1>
+
+            <h1 style="text-align:center;color:white;font: 400 24px/1 'Kaushan Script';">Local Scouter</h1>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li style="color:white;background-color:#f15f22;"><a href="/top10region">Top 10 Region </a></li>
-                <li style="color:white;background-color:#f15f22"><a href="/top10Overal">Top 10 Overal</a></li>
-                <li style="color:white;background-color:#f15f22;"><a href="/uploadfoto">Upload </a></li>
+                <li style="border:solid 0.5px white;margin-top:-5px;font-family: BPreplay;"><a href="/main">Home </a></li>
+                <li style="border:solid 0.5px white;font-family: BPreplay;"><a href="/top10region">Top 10 Local </a></li>
+                <li style="border:solid 0.5px white;font-family: BPreplay;"><a href="/top10Overal">Top 10 World</a></li>
+                <li style="border:solid 0.5px white;font-family: BPreplay;"><a href="/uploadfoto">Upload </a></li>
             </ul>
         </div> </div>
 </nav>
@@ -101,19 +108,74 @@
         </div>
     </div>
 
+    <p style=" margin-top:-50px;font-size:24px;color:#F15F22;font-family: BPreplay;text-align:center;">Do you know this place?</p>
 
-    <button type="submit" id="button-left" >Known</button>
-    <button type="submit" id="button-right" >Unknown</button>
+    <button type="submit" id="button-left" >X</button>
+    <button type="submit" id="button-mid"  data-toggle="modal" data-target="#myModal">...</button>
 
-</div>
+    <button type="submit" id="button-right" >+</button>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Report this picture!</h4>
+                </div>
+                <div class="modal-body">
+                    <strong>All reports are strictly confidential.</strong> What best destribes this?
+
+                    <form>
+                        <br>
+                        <label>
+                        <input type="radio" class="radio4" name="sex" value="male" checked>Report for spam!
+                        </label>
+                        <br>
+                        <label>
+                        <input type="radio" class="radio4" name="sex" value="female">This place isn't cool!
+                        </label>
+                        <br>
+                        <label>
+                        <input type="radio" class="radio4" name="sex" value="female">Nudity, pornography, or sexually, explicit content!
+                        </label> <br>
+                        <label>
+                        <input type="radio" class="radio4" name="sex" value="female">Duplicate,fake, or miscategorized!</label>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
 <script>
     $(document).ready(function(){
         var socket = io.connect('http://localhost:3000');
         socket.emit('randomize', {});
     });
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })
 
 
+    document.body.onclick = function (evt) {
+        var node = evt.target;
+
+        if(node.nodeName === "INPUT") {
+            var isChecked = node.checked;
+            (isChecked) ?
+                    isChecked = false :
+                    isChecked = true;
+        }
+    }
 </script>
 
 

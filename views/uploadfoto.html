@@ -12,7 +12,7 @@
     <script src="/javascripts/plaatsen.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="animated fadeIn" onload="getLocation()"  style=" background-color:#f15f22;">
+<body class="animated fadeIn" onload="getLocation()"  >
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -24,21 +24,22 @@
                 <span style="background-color:white;" class="icon-bar"></span>
                 <span style="background-color:white;"class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/main"><img src="../images/logo.png" alt="logo" style="height:30px;width:130px;"/></a>
-            <h1 style="text-align:center;color:white;">Upload Foto</h1>
+
+            <h1 style="text-align:center;color:white;font: 400 24px/1 'Kaushan Script';">Upload</h1>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li style="color:white;background-color:#f15f22;"><a href="/top10region">Top 10 Region </a></li>
-                <li style="color:white;background-color:#f15f22"><a href="/top10Overal">Top 10 Overal</a></li>
-                <li style="color:white;background-color:#f15f22;"><a href="/uploadfoto">Upload </a></li>
+                <li style="border:solid 0.5px white;margin-top:-5px;"><a href="/main">Home </a></li>
+                <li style="border:solid 0.5px white;"><a href="/top10region">Top 10 Local </a></li>
+                <li style="border:solid 0.5px white;"><a href="/top10Overal">Top 10 World</a></li>
+                <li style="border:solid 0.5px white;"><a href="/uploadfoto">Upload </a></li>
             </ul>
         </div> </div>
 </nav>
 <div class="container">
-    <h1 class="animated4 fadeIn indexh1" style="color:white;margin-top:-70px;">Local Scouter</h1>
+    <h1 class="animated4 fadeIn indexh1" style="color:#f15f22;margin-top:-70px;">Local Scouter</h1>
     <form id        =  "uploadForm" class="animated4 fadeIn"
           enctype   =  "multipart/form-data"
           action    =  "/api/photo"
@@ -49,26 +50,26 @@
 
 
         <ul class="input-list style-1 clearfix">
-            <h3 style="color:white;"> Geef een Titel op<span class="req">*</span></h3>
+            <h3 style="text-align:center;margin-left:-20px;"> Title<span class="req">*</span></h3>
             <li>
 
-                <input type="text" id ="titel" placeholder="">
+                <input type="text" id ="titel" placeholder="" maxlength="25" required="">
             </li>
-            <h3 style="color:white;"> Geef een Korte beschrijving<span>*</span></h3>
+            <h3 style="text-align:center;margin-left:-20px;"> Description<span>*</span></h3>
             <li>
 
-                <input type="text" id ="beschrijving" />
+                <input type="text" id ="beschrijving" maxlength="25" required="" />
             </li>
 
         </ul>
         <br>
 <br>
-        <input id="linkpicture" class ="btn btn-default button2" type="file" name="userPhoto" />
+        <input id="linkpicture" class ="btn btn-default button2" type="file" name="userPhoto" required="" />
         <input type="hidden" id="latitude">
         <input type="hidden" id="longitude">
         <br>
         <br>
-        <button type="submit" value="Upload Image"  class="btn btn-default button"/>Deel jou plaats.</button>
+        <button type="submit" value="Upload Image"  class="btn btn-default button"/>Share your location.</button>
 
     </form>
 </div>
