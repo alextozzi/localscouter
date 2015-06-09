@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link href="stylesheets/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="/javascripts/plaatsen.js"></script>
@@ -14,30 +16,30 @@
 </head>
 <body class="animated fadeIn" onload="getLocation()"  >
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span style="background-color:white;" class="icon-bar"></span>
-                <span style="background-color:white;" class="icon-bar"></span>
-                <span style="background-color:white;"class="icon-bar"></span>
-            </button>
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
+    <a class="navmenu-brand" style="background-color:#F15F22;color:white; margin-top:0px;font: 400 30px/1 'Kaushan Script', cursive;" href="/main">Local Scouter</a>
 
-            <h1 style="text-align:center;color:white;font: 400 24px/1 'Kaushan Script';">Upload</h1>
-        </div>
+    <ul class="nav navmenu-nav">
+        <li><a href="/main"><img src="/images/House_outline_24g.png " > Local Scouter</a></li>
+        <li ><a  href="/top10region"><img src="/images/Royal_crown_outline_for_a_prince_24 " style="margin-top:-5px;"> Top Unknown local</a></li>
+        <li><a href="/top10Overal"><img src="/images/Global_symbol_24.png "> Top Unknown World</a></li>
+        <li class="active2"><a style="color:white;" href="/uploadfoto"><img src="/images/Share_Arrow_24w.png ">   Upload</a></li>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li style="border:solid 0.5px white;margin-top:-5px;"><a href="/main">Home </a></li>
-                <li style="border:solid 0.5px white;"><a href="/top10region">Top 10 Local </a></li>
-                <li style="border:solid 0.5px white;"><a href="/top10Overal">Top 10 World</a></li>
-                <li style="border:solid 0.5px white;"><a href="/uploadfoto">Upload </a></li>
-            </ul>
-        </div> </div>
-</nav>
+    </ul>
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+        <span style ="background-color:white;"class="icon-bar"></span>
+        <span style ="background-color:white;"class="icon-bar"></span>
+        <span style ="background-color:white;"class="icon-bar"></span>
+    </button>
+
+    <center style="color:white;margin-left:-22px;margin-top:10px;font: 400 24px/1 'Kaushan Script', cursive;position:absolute:">Upload</center>
+
+
+
+</div>
 <div class="container">
     <h1 class="animated4 fadeIn indexh1" style="color:#f15f22;margin-top:-70px;">Local Scouter</h1>
     <form id        =  "uploadForm" class="animated4 fadeIn"
@@ -90,11 +92,59 @@
         x.value =  position.coords.latitude;
         y.value = position.coords.longitude;
     }
+    $(function(){
+        var menuStatus;
+
+        $("a.showMenu").click(function(){
+            if(menuStatus != true){
+                $(".ui-page-active").animate({
+                    marginLeft: "165px",
+                }, 300, function(){menuStatus = true});
+                return false;
+            } else {
+                $(".ui-page-active").animate({
+                    marginLeft: "0px",
+                }, 300, function(){menuStatus = false});
+                return false;
+            }
+        });
+
+        $('.pages').live("swipeleft", function(){
+            if (menuStatus){
+                $(".ui-page-active").animate({
+                    marginLeft: "0px",
+                }, 300, function(){menuStatus = false});
+            }
+        });
+
+        $('.pages').live("swiperight", function(){
+            if (!menuStatus){
+                $(".ui-page-active").animate({
+                    marginLeft: "165px",
+                }, 300, function(){menuStatus = true});
+            }
+        });
+
+        $("#menu li a").click(function(){
+            var p = $(this).parent();
+            if($(p).hasClass('active')){
+                $("#menu li").removeClass('active');
+            } else {
+                $("#menu li").removeClass('active');
+                $(p).addClass('active');
+            }
+        });
+
+    });
 
 
 </script>
 
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/jasny-bootstrap.min.js"></script>
 
 
 
