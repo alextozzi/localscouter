@@ -1,8 +1,10 @@
 
 body{background-color:white;font-family: BPreplay;}
 
-.button{width:400px;font-size:20px;radius:20px;color:#f15f22; font-size:28px;text-align:center;margin-left:auto;margin-right:auto;border:solid 1px #F15F22;}
-.button2{width:250px;font-size:20px;radius:20px;color:#f15f22; font-size:18px;text-align:center;margin-left:auto;margin-right:auto;border:solid 1px #F15F22;}
+.button{width:400px;font-size:20px;radius:20px;color:white; font-size:28px;text-align:center;margin-left:auto;margin-right:auto;background-color:#44C2CE;font: 400 26px/1 'Kaushan Script', cursive;border:solid 1px black;}
+.button:hover{background-color:#44C2CE;color:white;}
+.button2{width:250px;font-size:20px;radius:20px;color:#f15f22; font-size:18px;text-align:center;margin-left:auto;margin-right:auto;color:white;background-color:#44C2CE;font: 400 18px/1 'Kaushan Script', cursive;}
+.button2:hover{background-color:#44C2CE;color:white;}
 
 
 .navbar-toggle{float:left;margin-left:10px;}
@@ -14,9 +16,32 @@ a:hover{text-decoration:none;}
 
 .nav img {width:25px;height:25px;margin-top:-2px;}
 
-
+.button input{color:white;background-color:#44C2CE;}
 li{list-style-type: none;width:100%;}
-#linkpicture{color:black;}
+#linkpicture{color:white;background-color:#44C2CE;background:#44C2CE;}
+input#linkpicture{color:white;background-color:#44C2CE;}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    font: 400 26px/1 'Kaushan Script', cursive;
+    background-color:#44C2CE;
+    width:400px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    margin-left:auto;margin-right:auto;
+    background-color:#44C2CE;
+    font: 400 26px/1 'Kaushan Script', cursive;
+
+}
 input[type="text"] {
     display: block;
     margin-left:-20px;
@@ -24,6 +49,7 @@ input[type="text"] {
     font-size: 18px;
     appearance: none;
     box-shadow: none;
+
 }
 input[type="text"]:focus {
     outline: none;
@@ -31,7 +57,7 @@ input[type="text"]:focus {
 
 .style-1 input[type="text"] {
     padding: 10px;
-    border: solid 1px #f15f22;
+    border: solid 1px #44C2CE;
     transition: box-shadow 0.7s, border 0.3s;
 }
 .style-1 input[type="text"]:focus,
